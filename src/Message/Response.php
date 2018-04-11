@@ -7,12 +7,14 @@ use Omnipay\Common\Message\AbstractResponse;
 class Response extends AbstractResponse
 {
     /**
-     * Is the response successful?
-     *
      * @return boolean
      */
     public function isSuccessful()
     {
-        // TODO: Implement isSuccessful() method.
+        if (isset($this->getData()['return_code']) && $this->getData()['return_code'] === 'SUCCESS') {
+            return true;
+        }
+
+        return false;
     }
 }
