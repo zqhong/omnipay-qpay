@@ -15,17 +15,7 @@ abstract class AbstractRequest extends AbstractCommomRequest
 
     public function getData()
     {
-        $paramters = $this->getParameters();
-
-        $objVars = get_object_vars($this);
-        foreach ($objVars as $key => $var) {
-            if (property_exists($this, $key) && is_object($var) === false) {
-                $paramters[$key] = $var;
-            }
-        }
-
-        $paramters = array_filter($paramters);
-        return $paramters;
+        return $this->getParameters();
     }
 
     /**
