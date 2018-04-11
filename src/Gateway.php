@@ -91,4 +91,106 @@ class Gateway extends AbstractGateway
     {
         return $this->createRequest(DownloadStatementRequest::class, $parameters);
     }
+
+    /**
+     * @return mixed
+     */
+    public function getCertFilePath()
+    {
+        return $this->getParameter('cert_file_path');
+    }
+
+    /**
+     * @param mixed $certFilePath
+     * @return Gateway
+     */
+    public function setCertFilePath($certFilePath)
+    {
+        return $this->setParameter('cert_file_path', $certFilePath);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMchId()
+    {
+        return $this->getParameter('mch_id');
+    }
+
+    /**
+     * @param string $mchId
+     * @return Gateway
+     */
+    public function setMchId($mchId)
+    {
+        return $this->setParameter('mch_id', $mchId);
+    }
+
+    /**
+     * @return string
+     */
+    public function getMchKey()
+    {
+        return $this->getParameter('mch_key');
+    }
+
+    /**
+     * @param string $mchKey
+     * @return Gateway
+     */
+    public function setMchKey($mchKey)
+    {
+        return $this->setParameter('mch_key', $mchKey);
+    }
+
+    /**
+     * @return string
+     */
+    public function getKeyFilePath()
+    {
+        return $this->getParameter('key_file_path');
+    }
+
+    /**
+     * @param string $keyFilePath
+     * @return Gateway
+     */
+    public function setKeyFilePath($keyFilePath)
+    {
+        return $this->setParameter('key_file_path', $keyFilePath);
+    }
+
+    /**
+     * @return string
+     */
+    public function getNotifyUrl()
+    {
+        return $this->getParameter('notify_url');
+    }
+
+    /**
+     * @param string $notifyUrl
+     * @return Gateway
+     */
+    public function setNotifyUrl($notifyUrl)
+    {
+        return $this->setParameter('notify_url', $notifyUrl);
+    }
+
+    /**
+     * @return string
+     */
+    public function getOpUserPasswd()
+    {
+        return $this->getParameter('op_user_passwd');
+    }
+
+    /**
+     * @param string $opUserPassword
+     * @return Gateway
+     */
+    public function setOpUserPasswd($opUserPassword)
+    {
+        return $this->setParameter('op_user_passwd', $opUserPassword);
+    }
 }
