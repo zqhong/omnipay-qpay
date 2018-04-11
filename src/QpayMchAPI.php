@@ -2,9 +2,6 @@
 
 namespace Omnipay\QPay;
 
-/**
- * @package Omnipay\QPay
- */
 class QpayMchAPI
 {
     protected $url;
@@ -65,43 +62,6 @@ class QpayMchAPI
         }
 
         return (array)QpayMchUtil::xmlToArray($ret);
-    }
-
-    /**
-     * 发送退款请求
-     *
-     * @param array $orderInfo
-     * @param integer $refundMoney
-     * @return array
-     */
-    public function refund($orderInfo, $refundMoney)
-    {
-        if (!empty($orderInfo['QPayNo'])) {
-            $params['transaction_id'] = $orderInfo['QPayNo'];
-        } else {
-            $params['out_trade_no'] = $orderInfo['tradeNO'];
-        }
-        $params['out_refund_no'] = $orderInfo['tradeNO'];
-        $params['refund_fee'] = $refundMoney;
-
-        return $this->reqQpay($params);
-    }
-
-    /**
-     * 查询订单
-     *
-     * @param array $order
-     * @return array
-     */
-    public function orderQuery($order)
-    {
-        if (!empty($order->QPayNo)) {
-            $params['transaction_id'] = $order->QPayNo;
-        } else {
-            $params['out_trade_no'] = $order['tradeNO'];
-        }
-
-        return $this->reqQpay($params);
     }
 
     /**

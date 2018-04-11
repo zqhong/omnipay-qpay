@@ -2,13 +2,13 @@
 
 namespace Omnipay\QPay\Message;
 
-class RefundRequest extends AbstractRequest
+class QueryRefundRequest extends AbstractRequest
 {
     /**
      * @return string
      */
     protected function getEndpoint()
     {
-        return 'https://api.qpay.qq.com/cgi-bin/pay/qpay_refund.cgi';
+        return 'https://qpay.qq.com/cgi-bin/pay/qpay_refund_query.cgi';
     }
 }

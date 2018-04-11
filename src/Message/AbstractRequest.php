@@ -5,9 +5,6 @@ namespace Omnipay\QPay\Message;
 use Omnipay\Common\Message\AbstractRequest as AbstractCommomRequest;
 use Omnipay\QPay\QpayMchAPI;
 
-/**
- * @package Omnipay\QPay\Message
- */
 abstract class AbstractRequest extends AbstractCommomRequest
 {
     protected $mchId;

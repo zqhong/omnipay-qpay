@@ -2,9 +2,6 @@
 
 namespace Omnipay\QPay;
 
-/**
- * @package Omnipay\QPay
- */
 class QpayMchUtil
 {
     /**

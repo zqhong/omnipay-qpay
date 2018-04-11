@@ -2,13 +2,13 @@
 
 namespace Omnipay\QPay\Message;
 
-class RefundRequest extends AbstractRequest
+class CloseOrderRequest extends AbstractRequest
 {
     /**
      * @return string
      */
     protected function getEndpoint()
     {
-        return 'https://api.qpay.qq.com/cgi-bin/pay/qpay_refund.cgi';
+        return 'https://qpay.qq.com/cgi-bin/pay/qpay_close_order.cgi';
     }
 }
