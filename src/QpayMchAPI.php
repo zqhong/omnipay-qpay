@@ -31,7 +31,14 @@ class QpayMchAPI
         $this->url = $url;
         $this->isSSL = $isSSL;
         $this->timeout = $timeout;
-        $this->config = $config;
+
+        $this->config['MCH_ID'] = $config['MCH_ID'];
+        $this->config['SUB_MCH_ID'] = $config['SUB_MCH_ID'];
+        $this->config['MCH_KEY'] = $config['MCH_KEY'];
+        $this->config['OP_USER_PASSWD'] = $config['OP_USER_PASSWD'];
+        $this->config['CERT_FILE_PATH'] = $config['CERT_FILE_PATH'];
+        $this->config['KEY_FILE_PATH'] = $config['KEY_FILE_PATH'];
+        $this->config['NOTIFY_URL'] = $config['NOTIFY_URL'];
     }
 
     /**
@@ -42,13 +49,13 @@ class QpayMchAPI
      */
     public function reqQpay($params)
     {
-        //商户号
         $params["mch_id"] = $this->config['MCH_ID'];
-        //随机字符串
         $params["nonce_str"] = QpayMchUtil::createNoncestr();
-        //签名
+        $params['notify_url'] = $this->config['NOTIFY_URL'];
+        $params['op_user_id'] = $this->config['MCH_ID'];
+        $params['op_user_passwd'] = md5($this->config['OP_USER_PASSWD']);
+
         $params["sign"] = QpayMchUtil::getSign($params, $this->config['MCH_KEY']);
-        //生成xml
         $xml = QpayMchUtil::arrayToXml($params);
 
         if (isset($this->isSSL)) {
@@ -56,6 +63,8 @@ class QpayMchAPI
         } else {
             $ret = $this->reqByCurlNormalPost($xml, $this->url, $this->timeout);
         }
+
+        $ret = QpayMchUtil::xmlToArray($ret);
         return $ret;
     }
 
@@ -73,28 +82,10 @@ class QpayMchAPI
         } else {
             $params['out_trade_no'] = $orderInfo['tradeNO'];
         }
-
         $params['out_refund_no'] = $orderInfo['tradeNO'];
         $params['refund_fee'] = $refundMoney;
 
-        $params['op_user_id'] = $this->config['MCH_ID'];
-        $params['op_user_passwd'] = md5($this->config['OP_USER_PASSWD']);
-
-        //商户号
-        $params["mch_id"] = $this->config['MCH_ID'];
-        //随机字符串
-        $params["nonce_str"] = QpayMchUtil::createNoncestr();
-        //签名
-        $params["sign"] = QpayMchUtil::getSign($params, $this->config['MCH_KEY']);
-
-        //生成xml
-        $xml = QpayMchUtil::arrayToXml($params);
-
-        $ret = $this->reqByCurlSSLPost($xml, 'https://api.qpay.qq.com/cgi-bin/pay/qpay_refund.cgi', 10);
-
-        $result = QpayMchUtil::xmlToArray($ret);
-
-        return $result;
+        return $this->reqQpay($params);
     }
 
     /**
@@ -111,17 +102,7 @@ class QpayMchAPI
             $params['out_trade_no'] = $order['tradeNO'];
         }
 
-        //商户号
-        $params["mch_id"] = $this->config['MCH_ID'];
-        //随机字符串
-        $params["nonce_str"] = QpayMchUtil::createNoncestr();
-        //签名
-        $params["sign"] = QpayMchUtil::getSign($params, $this->config['MCH_KEY']);
-
-        $qpayApi = new QpayMchAPI('https://qpay.qq.com/cgi-bin/pay/qpay_order_query.cgi', null, 10);
-        $result = $qpayApi->reqQpay($params);
-
-        return QpayMchUtil::xmlToArray($result);
+        return $this->reqQpay($params);
     }
 
     /**
@@ -176,8 +157,6 @@ class QpayMchAPI
             curl_close($ch);
             return $ret;
         } else {
-            $error = curl_errno($ch);
-            print_r($error);
             curl_close($ch);
             return false;
         }
