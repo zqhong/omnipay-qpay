@@ -45,7 +45,7 @@ class QpayMchAPI
      * 发送请求
      *
      * @param array $params
-     * @return bool|mixed
+     * @return array
      */
     public function reqQpay($params)
     {
@@ -64,8 +64,7 @@ class QpayMchAPI
             $ret = $this->reqByCurlNormalPost($xml, $this->url, $this->timeout);
         }
 
-        $ret = QpayMchUtil::xmlToArray($ret);
-        return $ret;
+        return (array)QpayMchUtil::xmlToArray($ret);
     }
 
     /**

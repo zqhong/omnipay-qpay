@@ -3,7 +3,7 @@
 namespace Omnipay\QPay\Message;
 
 use Omnipay\Common\Message\AbstractRequest as AbstractCommomRequest;
-use Omnipay\QPay\QpayMchUtil;
+use Omnipay\QPay\QpayMchAPI;
 
 /**
  * @package Omnipay\QPay\Message
@@ -27,21 +27,9 @@ abstract class AbstractRequest extends AbstractCommomRequest
      */
     abstract protected function getEndpoint();
 
-    /**
-     * @return string
-     */
     public function getData()
     {
-        $data = $this->parameters->all();
-
-        $data['op_user_id'] = $this->mchId;
-        $data['op_user_passwd'] = md5($this->opUserPassword);
-        $data['nonce_str'] = QpayMchUtil::createNoncestr();
-//        $data['sign'] = QpayMchUtil::getSign($data, $this->mchKey);
-
-        $xml = QpayMchUtil::arrayToXml($data);
-
-        return $xml;
+        return [];
     }
 
     /**
@@ -53,25 +41,18 @@ abstract class AbstractRequest extends AbstractCommomRequest
      */
     public function sendData($data)
     {
-        foreach ($data as $k => $v) {
-            $this->setParameter($k, $v);
-        }
-        $xml = $this->getData();
+        $api = new QpayMchAPI($this->getEndpoint(), true, 5, [
+            'MCH_ID' => $this->getMchId(),
+            'SUB_MCH_ID' => '',
+            'MCH_KEY' => $this->getMchKey(),
+            'OP_USER_PASSWD' => $this->getOpUserPassword(),
+            'CERT_FILE_PATH' => $this->getCertFilePath(),
+            'KEY_FILE_PATH' => $this->getKeyFilePath(),
+            'NOTIFY_URL' => $this->getNotifyUrl(),
+        ]);
 
-        $this
-            ->httpClient
-            ->setConfig([
-                'curl.options' => [
-                    CURLOPT_SSLCERTTYPE => 'PEM',
-                    CURLOPT_SSLCERT => $this->getCertFilePath(),
-                    CURLOPT_SSLKEYTYPE => 'PEM',
-                    CURLOPT_SSLKEY => $this->getKeyFilePath(),
-                ],
-            ])
-            ->post($this->getEndpoint())
-            ->setBody($xml)
-            ->send()
-            ->getBody();
+        $result = $api->reqQpay($data);
+        return new Response($this, $result);
     }
 
 
