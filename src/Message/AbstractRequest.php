@@ -7,6 +7,20 @@ use Omnipay\QPay\QpayMchAPI;
 
 abstract class AbstractRequest extends AbstractCommomRequest
 {
+    protected $certFilePath;
+
+    protected $mchId;
+
+    protected $mchKey;
+
+    protected $keyFilePath;
+
+    protected $notifyUrl;
+
+    protected $opUserId;
+
+    protected $opUserPasswd;
+
     /**
      * @return string
      */
@@ -38,5 +52,117 @@ abstract class AbstractRequest extends AbstractCommomRequest
 
         $result = $api->reqQpay($data);
         return new Response($this, $result);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCertFilePath()
+    {
+        return $this->certFilePath;
+    }
+
+    /**
+     * @param mixed $certFilePath
+     */
+    public function setCertFilePath($certFilePath)
+    {
+        $this->certFilePath = $certFilePath;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMchId()
+    {
+        return $this->mchId;
+    }
+
+    /**
+     * @param mixed $mchId
+     */
+    public function setMchId($mchId)
+    {
+        $this->mchId = $mchId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMchKey()
+    {
+        return $this->mchKey;
+    }
+
+    /**
+     * @param mixed $mchKey
+     */
+    public function setMchKey($mchKey)
+    {
+        $this->mchKey = $mchKey;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getKeyFilePath()
+    {
+        return $this->keyFilePath;
+    }
+
+    /**
+     * @param mixed $keyFilePath
+     */
+    public function setKeyFilePath($keyFilePath)
+    {
+        $this->keyFilePath = $keyFilePath;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNotifyUrl()
+    {
+        return $this->notifyUrl;
+    }
+
+    /**
+     * @param mixed $notifyUrl
+     */
+    public function setNotifyUrl($notifyUrl)
+    {
+        $this->notifyUrl = $notifyUrl;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOpUserId()
+    {
+        return $this->opUserId;
+    }
+
+    /**
+     * @param mixed $opUserId
+     */
+    public function setOpUserId($opUserId)
+    {
+        $this->opUserId = $opUserId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOpUserPasswd()
+    {
+        return $this->opUserPasswd;
+    }
+
+    /**
+     * @param mixed $opUserPasswd
+     */
+    public function setOpUserPasswd($opUserPasswd)
+    {
+        $this->opUserPasswd = $opUserPasswd;
     }
 }
