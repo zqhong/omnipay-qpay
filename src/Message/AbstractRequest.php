@@ -2,25 +2,12 @@
 
 namespace Omnipay\QPay\Message;
 
+use Omnipay\Common\Helper;
 use Omnipay\Common\Message\AbstractRequest as AbstractCommomRequest;
 use Omnipay\QPay\QpayMchAPI;
 
 abstract class AbstractRequest extends AbstractCommomRequest
 {
-    protected $certFilePath;
-
-    protected $mchId;
-
-    protected $mchKey;
-
-    protected $keyFilePath;
-
-    protected $notifyUrl;
-
-    protected $opUserId;
-
-    protected $opUserPasswd;
-
     /**
      * @return string
      */
@@ -28,7 +15,17 @@ abstract class AbstractRequest extends AbstractCommomRequest
 
     public function getData()
     {
-        return $this->getParameters();
+        $paramters = $this->getParameters();
+
+        $objVars = get_object_vars($this);
+        foreach ($objVars as $key => $var) {
+            if (property_exists($this, $key) && is_object($var) === false) {
+                $paramters[$key] = $var;
+            }
+        }
+
+        $paramters = array_filter($paramters);
+        return $paramters;
     }
 
     /**
@@ -60,8 +57,12 @@ abstract class AbstractRequest extends AbstractCommomRequest
      */
     protected function getParameter($key)
     {
+        $camelCaseKey = Helper::camelCase($key);
         if (property_exists($this, $key)) {
             return $this->$key;
+        }
+        if (property_exists($this, $camelCaseKey)) {
+            return $this->$camelCaseKey;
         }
 
         return parent::getParameter($key);
@@ -73,15 +74,16 @@ abstract class AbstractRequest extends AbstractCommomRequest
      */
     public function getCertFilePath()
     {
-        return $this->certFilePath;
+        return $this->getParameter('cert_file_path');
     }
 
     /**
      * @param mixed $certFilePath
+     * @return AbstractCommomRequest
      */
     public function setCertFilePath($certFilePath)
     {
-        $this->certFilePath = $certFilePath;
+        return $this->setParameter('cert_file_path', $certFilePath);
     }
 
     /**
@@ -89,15 +91,16 @@ abstract class AbstractRequest extends AbstractCommomRequest
      */
     public function getMchId()
     {
-        return $this->mchId;
+        return $this->getParameter('mch_id');
     }
 
     /**
      * @param mixed $mchId
+     * @return AbstractCommomRequest
      */
     public function setMchId($mchId)
     {
-        $this->mchId = $mchId;
+        return $this->setParameter('mch_id', $mchId);
     }
 
     /**
@@ -105,15 +108,16 @@ abstract class AbstractRequest extends AbstractCommomRequest
      */
     public function getMchKey()
     {
-        return $this->mchKey;
+        return $this->getParameter('mch_key');
     }
 
     /**
      * @param mixed $mchKey
+     * @return AbstractCommomRequest
      */
     public function setMchKey($mchKey)
     {
-        $this->mchKey = $mchKey;
+        return $this->setParameter('mch_key', $mchKey);
     }
 
     /**
@@ -121,15 +125,16 @@ abstract class AbstractRequest extends AbstractCommomRequest
      */
     public function getKeyFilePath()
     {
-        return $this->keyFilePath;
+        return $this->getParameter('key_file_path');
     }
 
     /**
      * @param mixed $keyFilePath
+     * @return AbstractCommomRequest
      */
     public function setKeyFilePath($keyFilePath)
     {
-        $this->keyFilePath = $keyFilePath;
+        return $this->setParameter('key_file_path', $keyFilePath);
     }
 
     /**
@@ -137,15 +142,16 @@ abstract class AbstractRequest extends AbstractCommomRequest
      */
     public function getNotifyUrl()
     {
-        return $this->notifyUrl;
+        return $this->getParameter('notify_url');
     }
 
     /**
      * @param mixed $notifyUrl
+     * @return AbstractCommomRequest
      */
     public function setNotifyUrl($notifyUrl)
     {
-        $this->notifyUrl = $notifyUrl;
+        return $this->setParameter('notify_url', $notifyUrl);
     }
 
     /**
@@ -153,15 +159,16 @@ abstract class AbstractRequest extends AbstractCommomRequest
      */
     public function getOpUserId()
     {
-        return $this->opUserId;
+        return $this->getParameter('op_user_id');
     }
 
     /**
      * @param mixed $opUserId
+     * @return mixed
      */
     public function setOpUserId($opUserId)
     {
-        $this->opUserId = $opUserId;
+        return $this->getParameter('op_user_id');
     }
 
     /**
@@ -169,14 +176,15 @@ abstract class AbstractRequest extends AbstractCommomRequest
      */
     public function getOpUserPasswd()
     {
-        return $this->opUserPasswd;
+        return $this->getParameter('op_user_passwd');
     }
 
     /**
      * @param mixed $opUserPasswd
+     * @return AbstractCommomRequest
      */
     public function setOpUserPasswd($opUserPasswd)
     {
-        $this->opUserPasswd = $opUserPasswd;
+        return $this->setParameter('op_user_passwd', $opUserPasswd);
     }
 }

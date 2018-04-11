@@ -4,10 +4,6 @@ namespace Omnipay\QPay\Message;
 
 class QueryOrderRequest extends AbstractRequest
 {
-    protected $transactionId;
-
-    protected $outTradeNo;
-
     /**
      * @return string
      */
@@ -21,15 +17,16 @@ class QueryOrderRequest extends AbstractRequest
      */
     public function getTransactionId()
     {
-        return $this->transactionId;
+        return $this->getParameter('transaction_id');
     }
 
     /**
      * @param mixed $transactionId
+     * @return \Omnipay\Common\Message\AbstractRequest
      */
     public function setTransactionId($transactionId)
     {
-        $this->transactionId = $transactionId;
+        return $this->setParameter('transaction_id', $transactionId);
     }
 
     /**
@@ -37,14 +34,15 @@ class QueryOrderRequest extends AbstractRequest
      */
     public function getOutTradeNo()
     {
-        return $this->outTradeNo;
+        return $this->getParameter('out_trade_out');
     }
 
     /**
      * @param mixed $outTradeNo
+     * @return \Omnipay\Common\Message\AbstractRequest
      */
     public function setOutTradeNo($outTradeNo)
     {
-        $this->outTradeNo = $outTradeNo;
+        return $this->setParameter('out_trade_out', $outTradeNo);
     }
 }
