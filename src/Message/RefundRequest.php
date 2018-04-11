@@ -12,6 +12,6 @@ class RefundRequest extends AbstractRequest
      */
     protected function getEndpoint()
     {
-        return 'https://api.qpay.qq.com/cgi-bin/pay/qpay_refund.cgi';
+        return 'https://qpay.qq.com/cgi-bin/pay/qpay_refund_query.cgi';
     }
 }

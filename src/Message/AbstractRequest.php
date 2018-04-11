@@ -29,7 +29,7 @@ abstract class AbstractRequest extends AbstractCommomRequest
 
     public function getData()
     {
-        return [];
+        return $this->getParameters();
     }
 
     /**

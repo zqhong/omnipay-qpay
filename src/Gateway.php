@@ -3,18 +3,8 @@
 namespace Omnipay\QPay;
 
 use Omnipay\Common\AbstractGateway;
+use Omnipay\QPay\Message\RefundRequest;
 
-/**
- * @method \Omnipay\Common\Message\RequestInterface authorize(array $options = array())
- * @method \Omnipay\Common\Message\RequestInterface completeAuthorize(array $options = array())
- * @method \Omnipay\Common\Message\RequestInterface capture(array $options = array())
- * @method \Omnipay\Common\Message\RequestInterface purchase(array $options = array())
- * @method \Omnipay\Common\Message\RequestInterface completePurchase(array $options = array())
- * @method \Omnipay\Common\Message\RequestInterface void(array $options = array())
- * @method \Omnipay\Common\Message\RequestInterface createCard(array $options = array())
- * @method \Omnipay\Common\Message\RequestInterface updateCard(array $options = array())
- * @method \Omnipay\Common\Message\RequestInterface deleteCard(array $options = array())
- */
 class Gateway extends AbstractGateway
 {
     /***
@@ -25,20 +15,16 @@ class Gateway extends AbstractGateway
         return 'QPay';
     }
 
+    /**
+     * 需要参数：
+     * refund_id 或 out_refund_no 或 transaction_id 或 out_trade_no，四者选一
+     *
+     * @see https://qpay.qq.com/qpaywiki/showdocument.php?pid=38&docid=63
+     * @param array $parameters
+     * @return \Omnipay\Common\Message\AbstractRequest
+     */
     public function refund(array $parameters = array())
     {
-    }
-
-    public function __call($name, $arguments)
-    {
-        // TODO: Implement @method \Omnipay\Common\Message\RequestInterface authorize(array $options = array())
-        // TODO: Implement @method \Omnipay\Common\Message\RequestInterface completeAuthorize(array $options = array())
-        // TODO: Implement @method \Omnipay\Common\Message\RequestInterface capture(array $options = array())
-        // TODO: Implement @method \Omnipay\Common\Message\RequestInterface purchase(array $options = array())
-        // TODO: Implement @method \Omnipay\Common\Message\RequestInterface completePurchase(array $options = array())
-        // TODO: Implement @method \Omnipay\Common\Message\RequestInterface void(array $options = array())
-        // TODO: Implement @method \Omnipay\Common\Message\RequestInterface createCard(array $options = array())
-        // TODO: Implement @method \Omnipay\Common\Message\RequestInterface updateCard(array $options = array())
-        // TODO: Implement @method \Omnipay\Common\Message\RequestInterface deleteCard(array $options = array())
+        return $this->createRequest(RefundRequest::class, $parameters);
     }
 }
