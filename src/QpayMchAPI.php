@@ -52,6 +52,12 @@ class QpayMchAPI
         $params['op_user_id'] = $this->config['MCH_ID'];
         $params['op_user_passwd'] = md5($this->config['OP_USER_PASSWD']);
 
+        unset(
+            $params['mch_key'],
+            $params['cert_file_path'],
+            $params['key_file_path']
+        );
+
         $params["sign"] = QpayMchUtil::getSign($params, $this->config['MCH_KEY']);
         $xml = QpayMchUtil::arrayToXml($params);
 
