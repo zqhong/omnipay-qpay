@@ -55,6 +55,20 @@ abstract class AbstractRequest extends AbstractCommomRequest
     }
 
     /**
+     * @param string $key
+     * @return mixed
+     */
+    protected function getParameter($key)
+    {
+        if (property_exists($this, $key)) {
+            return $this->$key;
+        }
+
+        return parent::getParameter($key);
+    }
+
+
+    /**
      * @return mixed
      */
     public function getCertFilePath()
