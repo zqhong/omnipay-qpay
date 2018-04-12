@@ -2,18 +2,10 @@
 
 namespace Omnipay\QPay\Message;
 
+use Omnipay\Common\Message\AbstractRequest as AbstractCommomRequest;
+
 class RefundRequest extends AbstractRequest
 {
-    protected $transactionId;
-
-    protected $outTradeNo;
-
-    protected $outRefundNo;
-
-    protected $refundFee;
-
-    protected $refundAccount;
-
     /**
      * @return string
      */
@@ -27,15 +19,16 @@ class RefundRequest extends AbstractRequest
      */
     public function getTransactionId()
     {
-        return $this->transactionId;
+        return $this->getParameter('transaction_id');
     }
 
     /**
      * @param mixed $transactionId
+     * @return AbstractCommomRequest
      */
     public function setTransactionId($transactionId)
     {
-        $this->transactionId = $transactionId;
+        return $this->setParameter('transaction_id', $transactionId);
     }
 
     /**
@@ -43,15 +36,16 @@ class RefundRequest extends AbstractRequest
      */
     public function getOutTradeNo()
     {
-        return $this->outTradeNo;
+        return $this->getParameter('out_trade_no');
     }
 
     /**
      * @param mixed $outTradeNo
+     * @return AbstractCommomRequest
      */
     public function setOutTradeNo($outTradeNo)
     {
-        $this->outTradeNo = $outTradeNo;
+        return $this->setParameter('out_trade_no', $outTradeNo);
     }
 
     /**
@@ -59,15 +53,16 @@ class RefundRequest extends AbstractRequest
      */
     public function getOutRefundNo()
     {
-        return $this->outRefundNo;
+        return $this->getParameter('out_refund_no');
     }
 
     /**
      * @param mixed $outRefundNo
+     * @return AbstractCommomRequest
      */
     public function setOutRefundNo($outRefundNo)
     {
-        $this->outRefundNo = $outRefundNo;
+        return $this->setParameter('out_refund_no', $outRefundNo);
     }
 
     /**
@@ -75,15 +70,16 @@ class RefundRequest extends AbstractRequest
      */
     public function getRefundFee()
     {
-        return $this->refundFee;
+        return $this->getParameter('refund_fee');
     }
 
     /**
      * @param mixed $refundFee
+     * @return AbstractCommomRequest
      */
     public function setRefundFee($refundFee)
     {
-        $this->refundFee = $refundFee;
+        return $this->setParameter('refund_fee', $refundFee);
     }
 
     /**
@@ -91,14 +87,32 @@ class RefundRequest extends AbstractRequest
      */
     public function getRefundAccount()
     {
-        return $this->refundAccount;
+        return $this->getParameter('refund_account');
     }
 
     /**
      * @param mixed $refundAccount
+     * @return AbstractCommomRequest
      */
     public function setRefundAccount($refundAccount)
     {
-        $this->refundAccount = $refundAccount;
+        return $this->setParameter('refund_account', $refundAccount);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOpUserPasswd()
+    {
+        return $this->getParameter('op_user_passwd');
+    }
+
+    /**
+     * @param mixed $opUserPasswd
+     * @return AbstractCommomRequest
+     */
+    public function setOpUserPasswd($opUserPasswd)
+    {
+        return $this->setParameter('op_user_passwd', $opUserPasswd);
     }
 }

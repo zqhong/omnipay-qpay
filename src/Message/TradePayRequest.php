@@ -4,18 +4,6 @@ namespace Omnipay\QPay\Message;
 
 class TradePayRequest extends AbstractRequest
 {
-    protected $body;
-
-    protected $outTradeNo;
-
-    protected $feeType;
-
-    protected $totalFee;
-
-    protected $spbillCreateIp;
-
-    protected $tradeType;
-
     /**
      * @return string
      */
@@ -29,15 +17,16 @@ class TradePayRequest extends AbstractRequest
      */
     public function getBody()
     {
-        return $this->body;
+        return $this->getParameter('body');
     }
 
     /**
      * @param mixed $body
+     * @return \Omnipay\Common\Message\AbstractRequest
      */
     public function setBody($body)
     {
-        $this->body = $body;
+        return $this->setParameter('body', $body);
     }
 
     /**
@@ -45,15 +34,16 @@ class TradePayRequest extends AbstractRequest
      */
     public function getOutTradeNo()
     {
-        return $this->outTradeNo;
+        return $this->getParameter('out_trade_no');
     }
 
     /**
      * @param mixed $outTradeNo
+     * @return \Omnipay\Common\Message\AbstractRequest
      */
     public function setOutTradeNo($outTradeNo)
     {
-        $this->outTradeNo = $outTradeNo;
+        return $this->setParameter('out_trade_no', $outTradeNo);
     }
 
     /**
@@ -61,15 +51,16 @@ class TradePayRequest extends AbstractRequest
      */
     public function getFeeType()
     {
-        return $this->feeType;
+        return $this->getParameter('fee_type');
     }
 
     /**
      * @param mixed $feeType
+     * @return \Omnipay\Common\Message\AbstractRequest
      */
     public function setFeeType($feeType)
     {
-        $this->feeType = $feeType;
+        return $this->setParameter('fee_type', $feeType);
     }
 
     /**
@@ -77,15 +68,16 @@ class TradePayRequest extends AbstractRequest
      */
     public function getTotalFee()
     {
-        return $this->totalFee;
+        return $this->getParameter('total_fee');
     }
 
     /**
      * @param mixed $totalFee
+     * @return \Omnipay\Common\Message\AbstractRequest
      */
     public function setTotalFee($totalFee)
     {
-        $this->totalFee = $totalFee;
+        return $this->setParameter('total_fee', $totalFee);
     }
 
     /**
@@ -93,15 +85,16 @@ class TradePayRequest extends AbstractRequest
      */
     public function getSpbillCreateIp()
     {
-        return $this->spbillCreateIp;
+        return $this->getParameter('spbill_create_ip');
     }
 
     /**
      * @param mixed $spbillCreateIp
+     * @return \Omnipay\Common\Message\AbstractRequest
      */
     public function setSpbillCreateIp($spbillCreateIp)
     {
-        $this->spbillCreateIp = $spbillCreateIp;
+        return $this->setParameter('spbill_create_ip', $spbillCreateIp);
     }
 
     /**
@@ -109,14 +102,15 @@ class TradePayRequest extends AbstractRequest
      */
     public function getTradeType()
     {
-        return $this->tradeType;
+        return $this->getParameter('trade_type');
     }
 
     /**
      * @param mixed $tradeType
+     * @return \Omnipay\Common\Message\AbstractRequest
      */
     public function setTradeType($tradeType)
     {
-        $this->tradeType = $tradeType;
+        return $this->setParameter('trade_type', $tradeType);
     }
 }

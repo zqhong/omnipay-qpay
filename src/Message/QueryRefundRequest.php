@@ -4,14 +4,6 @@ namespace Omnipay\QPay\Message;
 
 class QueryRefundRequest extends AbstractRequest
 {
-    protected $refundId;
-
-    protected $outRefundNo;
-
-    protected $transactionId;
-
-    protected $outTradeNo;
-
     /**
      * @return string
      */
@@ -25,15 +17,16 @@ class QueryRefundRequest extends AbstractRequest
      */
     public function getRefundId()
     {
-        return $this->refundId;
+        return $this->getParameter('refund_id');
     }
 
     /**
      * @param mixed $refundId
+     * @return \Omnipay\Common\Message\AbstractRequest
      */
     public function setRefundId($refundId)
     {
-        $this->refundId = $refundId;
+        return $this->setParameter('refund_id', $refundId);
     }
 
     /**
@@ -41,15 +34,16 @@ class QueryRefundRequest extends AbstractRequest
      */
     public function getOutRefundNo()
     {
-        return $this->outRefundNo;
+        return $this->getParameter('out_refund_no');
     }
 
     /**
      * @param mixed $outRefundNo
+     * @return \Omnipay\Common\Message\AbstractRequest
      */
     public function setOutRefundNo($outRefundNo)
     {
-        $this->outRefundNo = $outRefundNo;
+        return $this->setParameter('out_refund_no', $outRefundNo);
     }
 
     /**
@@ -57,15 +51,16 @@ class QueryRefundRequest extends AbstractRequest
      */
     public function getTransactionId()
     {
-        return $this->transactionId;
+        return $this->getParameter('transaction_id');
     }
 
     /**
      * @param mixed $transactionId
+     * @return \Omnipay\Common\Message\AbstractRequest
      */
     public function setTransactionId($transactionId)
     {
-        $this->transactionId = $transactionId;
+        return $this->setParameter('transaction_id', $transactionId);
     }
 
     /**
@@ -73,14 +68,15 @@ class QueryRefundRequest extends AbstractRequest
      */
     public function getOutTradeNo()
     {
-        return $this->outTradeNo;
+        return $this->getParameter('out_trade_no');
     }
 
     /**
      * @param mixed $outTradeNo
+     * @return \Omnipay\Common\Message\AbstractRequest
      */
     public function setOutTradeNo($outTradeNo)
     {
-        $this->outTradeNo = $outTradeNo;
+        return $this->setParameter('out_trade_no', $outTradeNo);
     }
 }

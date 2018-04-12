@@ -4,12 +4,6 @@ namespace Omnipay\QPay\Message;
 
 class DownloadStatementRequest extends AbstractRequest
 {
-    protected $billDate;
-
-    protected $billType;
-
-    protected $tarType;
-
     /**
      * @return string
      */
@@ -23,15 +17,16 @@ class DownloadStatementRequest extends AbstractRequest
      */
     public function getBillDate()
     {
-        return $this->billDate;
+        return $this->getParameter('bill_date');
     }
 
     /**
      * @param mixed $billDate
+     * @return \Omnipay\Common\Message\AbstractRequest
      */
     public function setBillDate($billDate)
     {
-        $this->billDate = $billDate;
+        return $this->setParameter('bill_date', $billDate);
     }
 
     /**
@@ -39,15 +34,16 @@ class DownloadStatementRequest extends AbstractRequest
      */
     public function getBillType()
     {
-        return $this->billType;
+        return $this->getParameter('bill_type');
     }
 
     /**
      * @param mixed $billType
+     * @return \Omnipay\Common\Message\AbstractRequest
      */
     public function setBillType($billType)
     {
-        $this->billType = $billType;
+        return $this->setParameter('bill_type', $billType);
     }
 
     /**
@@ -55,14 +51,15 @@ class DownloadStatementRequest extends AbstractRequest
      */
     public function getTarType()
     {
-        return $this->tarType;
+        return $this->getParameter('tar_type');
     }
 
     /**
      * @param mixed $tarType
+     * @return \Omnipay\Common\Message\AbstractRequest
      */
     public function setTarType($tarType)
     {
-        $this->tarType = $tarType;
+        return $this->setParameter('tar_type', $tarType);
     }
 }

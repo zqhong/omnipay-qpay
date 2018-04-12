@@ -2,7 +2,6 @@
 
 namespace Omnipay\QPay\Message;
 
-use Omnipay\Common\Helper;
 use Omnipay\Common\Message\AbstractRequest as AbstractCommomRequest;
 use Omnipay\QPay\QpayMchAPI;
 
@@ -40,24 +39,6 @@ abstract class AbstractRequest extends AbstractCommomRequest
         $result = $api->reqQpay($data);
         return new Response($this, $result);
     }
-
-    /**
-     * @param string $key
-     * @return mixed
-     */
-    protected function getParameter($key)
-    {
-        $camelCaseKey = Helper::camelCase($key);
-        if (property_exists($this, $key)) {
-            return $this->$key;
-        }
-        if (property_exists($this, $camelCaseKey)) {
-            return $this->$camelCaseKey;
-        }
-
-        return parent::getParameter($key);
-    }
-
 
     /**
      * @return mixed
@@ -161,20 +142,4 @@ abstract class AbstractRequest extends AbstractCommomRequest
         return $this->getParameter('op_user_id');
     }
 
-    /**
-     * @return mixed
-     */
-    public function getOpUserPasswd()
-    {
-        return $this->getParameter('op_user_passwd');
-    }
-
-    /**
-     * @param mixed $opUserPasswd
-     * @return AbstractCommomRequest
-     */
-    public function setOpUserPasswd($opUserPasswd)
-    {
-        return $this->setParameter('op_user_passwd', $opUserPasswd);
-    }
 }

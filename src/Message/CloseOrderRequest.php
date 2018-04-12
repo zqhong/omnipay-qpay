@@ -4,10 +4,6 @@ namespace Omnipay\QPay\Message;
 
 class CloseOrderRequest extends AbstractRequest
 {
-    protected $outTradeNo;
-
-    protected $totalFee;
-
     /**
      * @return string
      */
@@ -21,15 +17,16 @@ class CloseOrderRequest extends AbstractRequest
      */
     public function getOutTradeNo()
     {
-        return $this->outTradeNo;
+        return $this->getParameter('out_trade_no');
     }
 
     /**
      * @param mixed $outTradeNo
+     * @return \Omnipay\Common\Message\AbstractRequest
      */
     public function setOutTradeNo($outTradeNo)
     {
-        $this->outTradeNo = $outTradeNo;
+        return $this->setParameter('out_trade_no', $outTradeNo);
     }
 
     /**
@@ -37,14 +34,15 @@ class CloseOrderRequest extends AbstractRequest
      */
     public function getTotalFee()
     {
-        return $this->totalFee;
+        return $this->getParameter('total_fee');
     }
 
     /**
      * @param mixed $totalFee
+     * @return \Omnipay\Common\Message\AbstractRequest
      */
     public function setTotalFee($totalFee)
     {
-        $this->totalFee = $totalFee;
+        return $this->setParameter('total_fee', $totalFee);
     }
 }
