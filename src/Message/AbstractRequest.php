@@ -142,4 +142,37 @@ abstract class AbstractRequest extends AbstractCommomRequest
         return $this->getParameter('op_user_id');
     }
 
+    /**
+     * @return mixed
+     */
+    public function getTransactionId()
+    {
+        return $this->getParameter('transaction_id');
+    }
+
+    /**
+     * @param mixed $transactionId
+     * @return AbstractCommomRequest
+     */
+    public function setTransactionId($transactionId)
+    {
+        return $this->setParameter('transaction_id', $transactionId);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOutTradeNo()
+    {
+        return $this->getParameter('out_trade_no');
+    }
+
+    /**
+     * @param mixed $outTradeNo
+     * @return AbstractCommomRequest
+     */
+    public function setOutTradeNo($outTradeNo)
+    {
+        return $this->setParameter('out_trade_no', $outTradeNo);
+    }
 }

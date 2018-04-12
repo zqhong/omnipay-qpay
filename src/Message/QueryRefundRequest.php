@@ -45,38 +45,4 @@ class QueryRefundRequest extends AbstractRequest
     {
         return $this->setParameter('out_refund_no', $outRefundNo);
     }
-
-    /**
-     * @return mixed
-     */
-    public function getTransactionId()
-    {
-        return $this->getParameter('transaction_id');
-    }
-
-    /**
-     * @param mixed $transactionId
-     * @return \Omnipay\Common\Message\AbstractRequest
-     */
-    public function setTransactionId($transactionId)
-    {
-        return $this->setParameter('transaction_id', $transactionId);
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getOutTradeNo()
-    {
-        return $this->getParameter('out_trade_no');
-    }
-
-    /**
-     * @param mixed $outTradeNo
-     * @return \Omnipay\Common\Message\AbstractRequest
-     */
-    public function setOutTradeNo($outTradeNo)
-    {
-        return $this->setParameter('out_trade_no', $outTradeNo);
-    }
 }
